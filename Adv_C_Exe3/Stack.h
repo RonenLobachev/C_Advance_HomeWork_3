@@ -5,7 +5,7 @@
 /// <summary>
 /// 
 /// </summary>
-typedef struct charNode 
+typedef struct charNode
 {
 	char data;
 	struct charNode* next;
@@ -14,7 +14,7 @@ typedef struct charNode
 /// <summary>
 /// 
 /// </summary>
-typedef struct Stack 
+typedef struct Stack
 {
 	charNode* head;
 }Stack;
@@ -97,3 +97,6 @@ int isPalindrome(Stack* s);
 /// <param name="s"> a non null pointer to a struct Stack</param>
 /// <param name="n"></param>
 void rotateStack(Stack* s, int n);
+
+// Display all values in the stack
+void display(Stack* s);
