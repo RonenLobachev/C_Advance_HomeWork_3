@@ -3,16 +3,19 @@
 #include "Queue.h"
 #include <string.h>
 
-#define Q1    //
-#define Q2   //Polindrome
-#define Q3     //Stack Rotation
+//#define STACK_Q1    //
+//#define STACK_Q2   //Polindrome
+//#define STACK_Q3     //Stack Rotation
+
+#define QUEUE_PART1 //all manage functions: init, enqueue, dequeue,destroyQueue, isEmptyQueue
+
 
 void main()
 {
-#ifdef Q1
+#ifdef STACK_Q1
 
     printf("\n\n");
-    printf("                          ////**** Tests for  Stack flipBetweenHashes ****////\n\n\n");
+    printf("////**** Tests for  Stack flipBetweenHashes ****////\n\n\n");
 
 
     //Text test1//
@@ -40,10 +43,9 @@ void main()
 
     printf("\n\n");
 
-#endif // q1
+#endif // STACK_Q1
 
-
-#ifdef Q2
+#ifdef STACK_Q2
 
     ////#### Tests for  Stack Polindrom ####////
     printf("\n\n");
@@ -148,12 +150,9 @@ void main()
 
 
 
-#endif // Q2
+#endif // STACK_Q2
 
-
-
-
-#ifdef Q3
+#ifdef STACK_Q3
 
     char textRotate[] = { "DEFABC" };
 
@@ -205,7 +204,25 @@ void main()
     printf("\n\n");
     printf(" \n");
 
-#endif // Q3
+#endif // STACK_Q3
+
+#ifdef QUEUE_PART1
+    Queue sQueueData;
+    initQueue(&sQueueData);
+    enqueue(&sQueueData,10);
+    enqueue(&sQueueData, 20);
+    enqueue(&sQueueData, 30);
+    enqueue(&sQueueData, 40);
+    printf("Queue is %s\n", (isEmptyQueue(&sQueueData) ? "empty" : "not empty"));
+    printQueue(&sQueueData);
+    printf("Dequeu value %d from queue\n", dequeue(&sQueueData));
+    printQueue(&sQueueData);
+    printf("Dequeu value %d from queue\n", dequeue(&sQueueData));
+    printQueue(&sQueueData);
+    printf("Destroy queue\n");
+    destroyQueue(&sQueueData);
+    printf("Queue is %s\n", (isEmptyQueue(&sQueueData) ? "empty" : "not empty"));
 
 
+#endif /*QUEUE_PART1*/
 }
