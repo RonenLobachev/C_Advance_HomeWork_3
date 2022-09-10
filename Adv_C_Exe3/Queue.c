@@ -47,7 +47,7 @@ void enqueue(Queue* q, unsigned int data)
 	pNewNode->next = NULL;
 
 	//Queue is empty
-	if ((q->head == NULL) && (q->head == q->tail))
+	if (isEmptyQueue(q))
 	{
 		q->head = q->tail = pNewNode;
 	}
@@ -63,12 +63,12 @@ unsigned int dequeue(Queue* q)
 	if (q == NULL)
 	{
 		printf("ERROR: Queue manage struct are not defined\n");
-		return;
+		return 0;
 	}
 	intNode* pNewHead = NULL;
 	unsigned int u32RetData = 0;
 	//If queue is not empty
-	if (q->head != NULL)
+	if (!isEmptyQueue(q))
 	{
 		pNewHead = q->head->next;
 		u32RetData = q->head->data;
@@ -89,6 +89,11 @@ unsigned int dequeue(Queue* q)
 
 int isEmptyQueue(const Queue* q)
 {
+	if (q == NULL)
+	{
+		printf("ERROR: Queue manage struct are not defined\n");
+		return 1;
+	}
 	return (q->head == NULL) ? 1 : 0;
 }
 
@@ -96,7 +101,31 @@ int isEmptyQueue(const Queue* q)
 
 void rotateQueue(Queue* q)
 {
-	// add your code here
+	intNode *pTmp = NULL, *pOldTail = NULL;
+	if (q == NULL)
+	{
+		printf("ERROR: Queue manage struct are not defined\n");
+		return;
+	}
+	//If queue is empty
+	if (isEmptyQueue(q))
+	{
+		printf("Empty queue\n");
+		return;
+	}
+	//If queue contatins only one node
+	if (q->head == q->tail)
+	{
+		return;
+	}
+
+	//Find one node before tail
+	pTmp = q->head;
+	while (pTmp->next != q->tail) { pTmp = pTmp->next; }
+	pTmp->next->next = q->head;
+	q->head = pTmp->next;
+	pTmp->next = NULL;
+	q->tail = pTmp;
 }
 
 void cutAndReplace(Queue* q)

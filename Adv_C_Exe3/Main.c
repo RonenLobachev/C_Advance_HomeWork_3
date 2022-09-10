@@ -7,8 +7,8 @@
 //#define STACK_Q2   //Polindrome
 //#define STACK_Q3     //Stack Rotation
 
-#define QUEUE_PART1 //all manage functions: init, enqueue, dequeue,destroyQueue, isEmptyQueue
-
+//#define QUEUE_PART1 //all manage functions: init, enqueue, dequeue,destroyQueue, isEmptyQueue
+#define QUEUE_PART2
 
 void main()
 {
@@ -223,6 +223,32 @@ void main()
     destroyQueue(&sQueueData);
     printf("Queue is %s\n", (isEmptyQueue(&sQueueData) ? "empty" : "not empty"));
 
-
 #endif /*QUEUE_PART1*/
+
+#ifdef QUEUE_PART2
+    Queue sQueueData;
+    initQueue(&sQueueData);
+    enqueue(&sQueueData, 10);
+    enqueue(&sQueueData, 20);
+    enqueue(&sQueueData, 30);
+    enqueue(&sQueueData, 40);
+
+    printf("Before rotate(first try)\n");
+    printQueue(&sQueueData);
+    rotateQueue(&sQueueData);
+    printf("After rotate(first try)\n");
+    printQueue(&sQueueData);
+
+    printf("Before rotate(sec try)\n");
+    printQueue(&sQueueData);
+    rotateQueue(&sQueueData);
+    printf("After rotate(sec try)\n");
+    printQueue(&sQueueData);
+
+    printf("Before rotate(third try)\n");
+    printQueue(&sQueueData);
+    rotateQueue(&sQueueData);
+    printf("After rotate(third try)\n");
+    printQueue(&sQueueData);
+#endif
 }
