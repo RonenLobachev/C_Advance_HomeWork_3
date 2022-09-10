@@ -101,7 +101,7 @@ int isEmptyQueue(const Queue* q)
 
 void rotateQueue(Queue* q)
 {
-	intNode *pTmp = NULL, *pOldTail = NULL;
+	intNode *pTmp = NULL;
 	if (q == NULL)
 	{
 		printf("ERROR: Queue manage struct are not defined\n");
