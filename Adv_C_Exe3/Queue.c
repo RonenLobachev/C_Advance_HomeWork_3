@@ -143,6 +143,12 @@ void cutAndReplace(Queue* q)
 		printf("ERROR: Queue manage struct are not defined\n");
 		return;
 	}
+	//If queue is empty
+	if (isEmptyQueue(q))
+	{
+		printf("Empty queue\n");
+		return;
+	}
 
 	//If queue contatins not-even node count
 	u32QueueLen = getQueueLen(q);
@@ -153,11 +159,6 @@ void cutAndReplace(Queue* q)
 	}
 
 	u32QueueLen /= 2;//get count of steps until we arived to he midle of list
-	if (u32QueueLen < 1)//list is only 1 node
-	{
-		printf("List contains only one node\n");
-		return;
-	}
 
 	//"Walk" in list until middle
 	pTmp = q->head;
