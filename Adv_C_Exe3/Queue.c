@@ -6,6 +6,7 @@
 /***************** Queue ADT Implementation *****************/
 static unsigned int calcAvg(Queue* q);
 static unsigned int getQueueLen(Queue* q);
+static void sortEnqueue(Queue* q, unsigned int u32Data);
 
 /***************** Queue ADT Implementation *****************/
 
@@ -182,7 +183,16 @@ void sortKidsFirst(Queue* q)
 		printf("ERROR: Queue manage struct are not defined\n");
 		return;
 	}
-	// add your code here
+	unsigned int u32Q_Len = getQueueLen(q);
+	Queue sTmpQ;
+	initQueue(&sTmpQ);
+
+	for (unsigned int u32Index = 0; u32Index < u32Q_Len; u32Index++)
+	{
+		sortEnqueue(&sTmpQ, dequeue(q));
+	}
+	q->head = sTmpQ.head;
+	q->tail = sTmpQ.tail;
 }
 
 void printQueue(Queue* q)
@@ -239,4 +249,49 @@ static unsigned int getQueueLen(Queue* q)
 		pTmp = pTmp->next;
 	}
 	return u32Cnt;
+}
+
+static void sortEnqueue(Queue* q, unsigned int u32Data)
+{
+	intNode *pTmp, *pTmp1;
+	intNode* pNewNode = malloc(sizeof(intNode));
+	if (pNewNode == NULL)
+	{
+		printf("ERROR: Allocation failed\n");
+		return;
+	}
+
+	pNewNode->data = u32Data;
+	pNewNode->next = NULL;
+
+	//Queue is empty
+	if (isEmptyQueue(q))
+	{
+		q->head = q->tail = pNewNode;
+	}
+	else
+	{
+		//Insert before head
+		if (q->head->data > u32Data)
+		{
+			pNewNode->next = q->head;
+			q->head = pNewNode;
+		}
+		else
+		{
+			pTmp = q->head;
+			while ((pTmp->next != NULL) && (pTmp->next->data < u32Data)) { pTmp = pTmp->next; }
+			if (pTmp->next == NULL)
+			{
+				pTmp->next = pNewNode;
+				q->tail = pNewNode;
+			}
+			else
+			{
+				pTmp1 = pTmp->next;
+				pTmp->next = pNewNode;
+				pNewNode->next = pTmp1;
+			}
+		}
+	}
 }

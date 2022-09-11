@@ -9,7 +9,7 @@
 
 //#define QUEUE_PART1 //all manage functions: init, enqueue, dequeue,destroyQueue, isEmptyQueue
 //#define QUEUE_PART2 // rotateQueue
-#define QUEUE_PART3 //cutAndReplace
+//#define QUEUE_PART3 //cutAndReplace
 #define QUEUE_PART4
 
 void main()
@@ -285,5 +285,23 @@ void main()
     printf("After cutAndReplace(sec try)\n");
     printQueue(&sQueueData);
 
+#endif
+
+#ifdef QUEUE_PART4
+    Queue sQueueData;
+    initQueue(&sQueueData);
+    enqueue(&sQueueData, 3);
+    enqueue(&sQueueData, 5);
+    enqueue(&sQueueData, 1);
+    enqueue(&sQueueData, 2);
+    enqueue(&sQueueData, 4);
+    enqueue(&sQueueData, 6);
+    enqueue(&sQueueData, 7);
+
+    printf("Before sortKidsFirst\n");
+    printQueue(&sQueueData);
+    sortKidsFirst(&sQueueData);
+    printf("After sortKidsFirst\n");
+    printQueue(&sQueueData);
 #endif
 }
