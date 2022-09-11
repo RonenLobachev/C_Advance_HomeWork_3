@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+/***************** Queue ADT Implementation *****************/
+static unsigned int calcAvg(Queue* q);
+static unsigned int getQueueLen(Queue* q);
+
 /***************** Queue ADT Implementation *****************/
 
 void initQueue(Queue* q)
@@ -130,11 +135,53 @@ void rotateQueue(Queue* q)
 
 void cutAndReplace(Queue* q)
 {
-	// add your code here
+	unsigned int u32QueueLen = 0, u32StepCnt = 0;
+	intNode* pTmp = NULL, *pTmp1 = NULL;
+	if (q == NULL)
+	{
+		printf("ERROR: Queue manage struct are not defined\n");
+		return;
+	}
+
+	//If queue contatins not-even node count
+	u32QueueLen = getQueueLen(q);
+	if (u32QueueLen % 2)
+	{
+		enqueue(q, calcAvg(q));
+		u32QueueLen++;
+	}
+
+	u32QueueLen /= 2;//get count of steps until we arived to he midle of list
+	if (u32QueueLen < 1)//list is only 1 node
+	{
+		printf("List contains only one node\n");
+		return;
+	}
+
+	//"Walk" in list until middle
+	pTmp = q->head;
+	while (u32StepCnt < (u32QueueLen - 1)) { u32StepCnt++; pTmp = pTmp->next; }
+	//Set new tail
+	q->tail = pTmp;
+	pTmp = pTmp->next;
+	q->tail->next = NULL;
+	//Reorder list
+	while (pTmp != NULL)
+	{
+		pTmp1 = pTmp->next;
+		pTmp->next = q->head;
+		q->head = pTmp;
+		pTmp = pTmp1;
+	}
 }
 
 void sortKidsFirst(Queue* q)
 {
+	if (q == NULL)
+	{
+		printf("ERROR: Queue manage struct are not defined\n");
+		return;
+	}
 	// add your code here
 }
 
@@ -159,4 +206,37 @@ void printQueue(Queue* q)
 		printf(" %d\n", pTmp->data);
 		pTmp = pTmp->next;
 	}
+}
+
+static unsigned int calcAvg(Queue* q)
+{
+	unsigned int u32Sum = 0, u32Cnt = 0;
+	intNode* pTmp = q->head;
+	while (pTmp != NULL)
+	{
+		u32Sum += pTmp->data;
+		u32Cnt++;
+		pTmp = pTmp->next;
+	}
+
+	if (u32Cnt != 0)
+	{
+		return (u32Sum / u32Cnt);
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+static unsigned int getQueueLen(Queue* q)
+{
+	unsigned int u32Cnt = 0;
+	intNode* pTmp = q->head;
+	while (pTmp != NULL)
+	{
+		u32Cnt++;
+		pTmp = pTmp->next;
+	}
+	return u32Cnt;
 }

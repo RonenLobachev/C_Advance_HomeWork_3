@@ -8,7 +8,9 @@
 //#define STACK_Q3     //Stack Rotation
 
 //#define QUEUE_PART1 //all manage functions: init, enqueue, dequeue,destroyQueue, isEmptyQueue
-#define QUEUE_PART2
+//#define QUEUE_PART2 // rotateQueue
+#define QUEUE_PART3 //cutAndReplace
+#define QUEUE_PART4
 
 void main()
 {
@@ -250,5 +252,38 @@ void main()
     rotateQueue(&sQueueData);
     printf("After rotate(third try)\n");
     printQueue(&sQueueData);
+#endif
+
+#ifdef QUEUE_PART3
+    Queue sQueueData;
+    initQueue(&sQueueData);
+    enqueue(&sQueueData, 6);
+    enqueue(&sQueueData, 1);
+    enqueue(&sQueueData, 5);
+    enqueue(&sQueueData, 2);
+    enqueue(&sQueueData, 3);
+    enqueue(&sQueueData, 1);
+    enqueue(&sQueueData, 9);
+
+    printf("Before cutAndReplace(first try)\n");
+    printQueue(&sQueueData);
+    cutAndReplace(&sQueueData);
+    printf("After cutAndReplace(first try)\n");
+    printQueue(&sQueueData);
+
+    destroyQueue(&sQueueData);
+    enqueue(&sQueueData, 6);
+    enqueue(&sQueueData, 5);
+    enqueue(&sQueueData, 2);
+    enqueue(&sQueueData, 3);
+    enqueue(&sQueueData, 1);
+    enqueue(&sQueueData, 9);
+
+    printf("Before cutAndReplace(sec try)\n");
+    printQueue(&sQueueData);
+    cutAndReplace(&sQueueData);
+    printf("After cutAndReplace(sec try)\n");
+    printQueue(&sQueueData);
+
 #endif
 }
